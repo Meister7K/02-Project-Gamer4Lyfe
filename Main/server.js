@@ -12,6 +12,21 @@ const hbs = exphbs.create({ helpers });
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+const sesh = {
+  secret: 'Super secret secret',
+  cookie: {
+    maxAge: 24*60*60*1000,
+    httpOnly: true,
+    secure: false, 
+    sameSite: 'strict',
+  },
+  resave: false,
+  saveUninitialized: true, 
+  store: new SequelizeStore({
+    db: sequelize,
+  })
+};
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
