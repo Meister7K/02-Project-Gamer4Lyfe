@@ -1,4 +1,18 @@
+// post for signup and login
+//! get to login page
+//! get to homepage
+// get to gamepage, only once logged in
+// get profile, only once logged in
+
 const router = require('express').Router();
+
+router.get('/', async(req, res) => {
+    try {
+        return res.render('homepage');
+    } catch {
+        res.status(500).json(err);
+    }
+})
 
 router.get('/login',async(req,res)=> {
     try{
@@ -15,7 +29,6 @@ router.get('/gamepage',async(req,res)=> {
         res.status(500).json(err);
     }
 })
-
 
 router.get('/settings',async(req,res)=>{
     try{
