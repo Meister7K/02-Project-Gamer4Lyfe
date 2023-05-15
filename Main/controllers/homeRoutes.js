@@ -1,1 +1,33 @@
-// This is wills file
+const router = require('express').Router();
+
+router.get('/settings',async(req,res)=>{
+    try{
+        return res.render('settings');
+    }catch{
+        res.status(500).json(err);
+    }
+})
+
+router.get('/gamecontrols',async(req,res)=>{
+    try{
+        return res.render('gameControls');
+    }catch{
+        res.status(500).json(err);
+    }
+})
+
+router.get('/profile',async(req,res)=>{
+    try{
+        return res.render('profile');
+    }catch{
+        res.status(500).json(err);
+    }
+})
+
+router.get('/savegame',async(req,res)=>{
+    try{
+        return res.render('saveGame');
+    }catch{
+        res.status(500).json(err);
+    }
+})

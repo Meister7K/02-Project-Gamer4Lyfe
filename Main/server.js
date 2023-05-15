@@ -1,3 +1,4 @@
+
 const express = require('express');
 const session = require('express-session');
 const routes = require('./controllers');
@@ -24,3 +25,4 @@ app.set('view engine', 'handlebars');
 sequelize.sync({ force: false}).then(()=>{
   app.listen(PORT, ()=> console.log(`Listening on PORT ${PORT}`))
 });
+
