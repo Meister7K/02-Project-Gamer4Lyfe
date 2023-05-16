@@ -22,9 +22,9 @@ router.get('/login',async(req,res)=> {
     }
 })
 
-router.get('/gamepage',async(req,res)=> {
+router.get('/game',async(req,res)=> {
     try{
-        return res.render('gamepage');
+        return res.render('game');
     }catch{
         res.status(500).json(err);
     }
@@ -38,7 +38,7 @@ router.get('/settings',async(req,res)=>{
     }
 })
 
-router.get('/gamecontrols',async(req,res)=>{
+router.get('/gameControls',async(req,res)=>{
     try{
         return res.render('gameControls');
     }catch{
@@ -54,7 +54,7 @@ router.get('/profile',async(req,res)=>{
     }
 })
 
-router.get('/savegame',async(req,res)=>{
+router.get('/saveGame',async(req,res)=>{
     try{
         return res.render('saveGame');
     }catch{
