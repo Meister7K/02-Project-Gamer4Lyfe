@@ -14,15 +14,7 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.get('/login',async(req,res)=> {
-    try{
-        return res.render('login');
-    }catch{
-        res.status(500).json(err);
-    }
-})
-
-router.get('/gamepage',async(req,res)=> {
+router.get('/play',async(req,res)=> {
     try{
         return res.render('gamepage');
     }catch{
@@ -33,14 +25,6 @@ router.get('/gamepage',async(req,res)=> {
 router.get('/settings',async(req,res)=>{
     try{
         return res.render('settings');
-    }catch{
-        res.status(500).json(err);
-    }
-})
-
-router.get('/gamecontrols',async(req,res)=>{
-    try{
-        return res.render('gameControls');
     }catch{
         res.status(500).json(err);
     }
