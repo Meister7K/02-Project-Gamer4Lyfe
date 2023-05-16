@@ -62,11 +62,5 @@ router.get('/savegame',async(req,res)=>{
     }
 })
 
-// post for sign up and login
-// login git
-
-// gamepage git
-// profile.git
-// 
 
 module.exports = router;
