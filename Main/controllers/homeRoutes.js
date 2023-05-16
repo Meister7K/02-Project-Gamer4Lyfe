@@ -24,7 +24,7 @@ router.get('/login',async(req,res)=> {
 
 router.get('/gamepage',async(req,res)=> {
     try{
-        return res.render('gamepage');
+        return res.render('game');
     }catch{
         res.status(500).json(err);
     }
