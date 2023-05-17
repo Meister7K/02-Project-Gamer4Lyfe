@@ -42,12 +42,22 @@ addEventListener("load", function () {
       ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
     }
   }
+  class EventFrame {
+    static width = 64;
+    static height = 64;
+    constructor({ position }) {
+      this.position = position;
+      this.width = 64;
+      this.height = 64;
+    }
+  }
 
   const boundaries = [];
+  const eventFrames = [];
 
   collisionsMap.forEach((row, i) => {
     row.forEach((symbol, j) => {
-      if (symbol !== 0)
+      if (symbol == 38 || symbol == 1610612774 || symbol == 3221225510)
         boundaries.push(
           new Boundary({
             position: {
@@ -56,6 +66,15 @@ addEventListener("load", function () {
             },
           })
         );
+          if(symbol == 2)
+          eventFrames.push(
+            new EventFrame({
+                position: {
+                    x: j * EventFrame.width,
+                    y: i * EventFrame.height,
+                },
+            })
+          )
     });
   });
 
@@ -210,6 +229,11 @@ addEventListener("load", function () {
           boundary.position.x += playerSpeed;
         });
       }
+
+    //   backgroundY -= player.position.y;
+    //   boundaries.forEach((boundary)=>{
+    //     boundary.position.y -= player.position.y
+    //   })
     }
     // !collision
     boundaries.forEach((boundary) => {
@@ -243,17 +267,19 @@ addEventListener("load", function () {
       ) {
         player.position.x = boundary.position.x + boundary.width;
         player.velocity.x = 0;
+        
       }
       
       // !right
-      if (
+      else if (
         player.position.x + player.velocity.x + player.width >= boundary.position.x &&
         player.position.x + player.velocity.x <= boundary.position.x + boundary.width &&
         player.position.y + player.height >= boundary.position.y &&
         player.position.y <= boundary.position.y + boundary.height
       ) {
         player.position.x = boundary.position.x - player.width;
-        player.velocity.x = +1;
+        player.velocity.x = 0;
+        
       }
     });
   }
