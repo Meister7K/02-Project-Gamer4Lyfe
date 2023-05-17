@@ -8,16 +8,17 @@
 
 :root {
     --orange: #C36A16;
-    --green: #73612D;
-    --black: #080604;
+    --olive: #73612D;
+    --midnight: #080604;
     --bright-red: #732103;
     --dark-red: #401303;
+    --white: #ffffff;
 }
 
 main {
     height: 100vh;
     width: 100%;
-    background-color: var(--black);
+    background-color: var(--midnight);
 }
 
 header {
@@ -27,7 +28,11 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 10rem;
+    font-size: 9rem;
+}
+
+h1 {
+    font-family: 'Press Start 2P', cursive;
 }
 
 /* the block that holds all blocks within */
@@ -46,10 +51,9 @@ header {
     width: inherit;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     grid-template-areas: 'header header header header'
-    'buttons buttons buttons buttons'
-    'foot foot foot foot' ;
+    'buttons buttons buttons buttons';
     grid-gap: 0.5rem;
 }
 
@@ -64,71 +68,131 @@ header {
 /* block that holds access buttons */
 .welcome-buttons {
     margin: 0 auto;
-    height: 65rem;
-    width: 50rem;
+    height: inherit;
+    width: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: var(--black);
+    background-color: var(--midnight);
     grid-area: buttons;
-    grid-gap: 2rem;
+    grid-gap: 0.25rem;
 }
 
+ /* grid for the forms to be side by side on a large screen */
+.form-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 4fr;
+    grid-template-areas:
+    'formOne formTwo';
+    grid-gap: 0.25rem;
+}
+
+/* Login form info */
 .inputContainer {
     height: 60rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 5rem;
+    grid-area: formOne;
 }
 
+/* Signup form info */
 .inputContainerSu {
-    height: 80rem;
+    height: 60rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-bottom: 5rem;
+    grid-area: formTwo;
 }
 
 .title {
-    color: var(--green);
+    color: var(--olive);
     font-size: 9rem;
     padding-bottom: 2rem;
 }
 
-.button {
-    background-color: var(--green);
+.log-form {
+    height: 35rem;
+    width: 35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: var(--orange);
+}
+
+.sign-form {
+    height: 55rem;
+    width: 35rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 5px;
+    background-color: var(--orange);
+}
+
+button {
+    border-radius: 10px;
+    background-color: var(--olive);
     height: 6rem;
     width: 25rem;
     font-size: 3rem;
 }
 
+form div {
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+form input {
+    margin-bottom: 1rem;
+    padding: 3px;
+    height: 3rem;
+    width: 25rem;
+    font-size: 2rem;
+    border-radius: 10px;
+    background-color: var(--white);
+}
+
+span {
+    margin-bottom: 10rem;
+    font-size: 15px;
+    color: var(--bright-red);
+}
+
 /* login button */
-.userBox {
+/* .userBox {
     margin-bottom: 1rem;
     height: 3rem;
     width: 25rem;
     font-size: 2rem;
     background-color: var(--green);
-}
+} */
 
+/* shorter code above that operates the input fields of both forms */
 /* sign in button */
-.passBox {
+/* .passBox {
     margin-bottom: 1rem;
     height: 3rem;
     width: 25rem;
     font-size: 2rem;
     background-color: var(--green);
-}
+} */
 
-.emailBox {
+/* .emailBox {
     margin-bottom: 1rem;
     height: 3rem;
     width: 25rem;
     font-size: 2rem;
     background-color: var(--green);
-}
+} */
 
 #passLabel {
     color: var(--green);
@@ -139,11 +203,4 @@ header {
 
 ::placeholder {
     color: #272727;
-}
-
-/* the footer at the bottom of the home page */
-footer {
-    height: 5rem;
-    width: inherit;
-    grid-area: foot;
 }

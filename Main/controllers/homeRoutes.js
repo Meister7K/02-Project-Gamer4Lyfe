@@ -14,17 +14,10 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.get('/login',async(req,res)=> {
-    try{
-        return res.render('login');
-    }catch{
-        res.status(500).json(err);
-    }
-})
 
 router.get('/gamepage',async(req,res)=> {
     try{
-        return res.render('gamepage');
+        return res.render('game');
     }catch{
         res.status(500).json(err);
     }
