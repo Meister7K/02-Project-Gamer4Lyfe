@@ -14,7 +14,7 @@ addEventListener("load", function () {
 
   //! background
   const backgroundImage = new Image();
-  backgroundImage.src = "./img/DungeonRoom2.png";
+  backgroundImage.src = "../images/DungeonRoom2.png";
   let backgroundX = 0;
   let backgroundY = 0
   backgroundImage.onload = ()=>{
@@ -179,9 +179,9 @@ addEventListener("load", function () {
   // ! Game animate
   function animate() {
     requestAnimationFrame(animate);
-    //ctx.fillStyle = "white";
+    // ctx.fillStyle = "white";
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-     ctx.drawImage(backgroundImage, backgroundX, backgroundY);
+    ctx.drawImage(backgroundImage, backgroundX, backgroundY);
 
     boundaries.forEach((boundary) => {
       boundary.draw();
