@@ -1,20 +1,87 @@
-//! wait to load 
+console.log(collisions);
+//! verify load first
 addEventListener("load", function () {
-    //! canvas consts
-    const canvas = document.getElementById('canvas1');
-    const ctx = canvas.getContext('2d');
-    //console.log(ctx);
-    const CANVAS_WIDTH = (canvas.width = innerWidth);
-    const CANVAS_HEIGHT = (canvas.height = innerHeight);
+  //! const
 
-    const gravity = 1;
+  const canvas = document.getElementById("canvas1");
+  const ctx = canvas.getContext("2d");
+  console.log(ctx);
+  const CANVAS_WIDTH = (canvas.width = 2000);
+  const CANVAS_HEIGHT = (canvas.height = 1900);
 
-      //! character
+  const gravity = 1.5;
+
+
+  //! background
+  const backgroundImage = new Image();
+  backgroundImage.src = "./img/DungeonRoom2.png";
+  let backgroundX = 0;
+  let backgroundY = 0
+  backgroundImage.onload = ()=>{
+    ctx.drawImage(backgroundImage,backgroundX,backgroundY,)
+  }
+  
+
+
+  const collisionsMap = [];
+  for (let i = 0; i < collisions.length; i += 50) {
+    collisionsMap.push(collisions.slice(i, 50 + i));
+  }
+  console.log(collisionsMap);
+
+  class Boundary {
+    static width = 64;
+    static height = 64;
+    constructor({ position }) {
+      this.position = position;
+      this.width = 64;
+      this.height = 64;
+    }
+    draw() {
+      ctx.fillStyle = "transparent";
+      ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+    }
+  }
+
+  const boundaries = [];
+
+  collisionsMap.forEach((row, i) => {
+    row.forEach((symbol, j) => {
+      if (symbol !== 0)
+        boundaries.push(
+          new Boundary({
+            position: {
+              x: j * Boundary.width,
+              y: i * Boundary.height,
+            },
+          })
+        );
+    });
+  });
+
+  console.log(boundaries);
+  // class Background {
+  //   constructor({ x, y, image }) {
+  //     this.position = {
+  //       x,
+  //       y,
+  //     };
+  //     this.image = image;
+  //     this.width = 200;
+  //     this.height = 20;
+  //   }
+  //   draw() {
+  //     ctx.fillStyle = "blue";
+  //     ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+  //   }
+  // }
+
+  //! character
   class Player {
     constructor() {
       this.position = {
-        x: 100,
-        y: 100,
+        x: 85,
+        y: 1800,
       };
       this.velocity = {
         x: 0,
@@ -42,26 +109,6 @@ addEventListener("load", function () {
 
   const player = new Player();
 
-  // ! Platforms
-  class Platform {
-    constructor({ x, y }) {
-      this.position = {
-        x,
-        y,
-      };
-      (this.width = 200), (this.height = 20);
-    }
-    draw() {
-      ctx.fillStyle = "blue";
-      ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-    }
-  }
-
-  const platforms = [
-    new Platform({ x: 800, y: 400 }),
-    new Platform({ x: 500, y: 700 }),
-  ];
-
   // ! movement
   const keys = {
     right: {
@@ -76,6 +123,7 @@ addEventListener("load", function () {
     console.log(keyCode);
     switch (keyCode) {
       case 38 || 87:
+        //!edit to if touching ground is true
         if (player.velocity.y === 0) {
           player.velocity.y -= 20;
         }
@@ -83,8 +131,8 @@ addEventListener("load", function () {
         break;
 
       case 40 || 83:
-        console.log("down");
-        //player.velocity.y += 20
+        console.log("interact");
+        interact = true //make interaction for opening doors
         break;
       case 37 || 65:
         console.log("left");
@@ -121,54 +169,94 @@ addEventListener("load", function () {
       case 32:
         console.log("attack");
         break;
+      case 44:
+        console.log("pause");
     }
   });
-    
+
+  const moveables = [backgroundImage, boundaries];
+
   // ! Game animate
   function animate() {
     requestAnimationFrame(animate);
-    ctx.fillStyle = "white";
+    //ctx.fillStyle = "white";
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+     ctx.drawImage(backgroundImage, backgroundX, backgroundY);
+
+    boundaries.forEach((boundary) => {
+      boundary.draw();
+    });
 
     player.update();
-    platforms.forEach((platform) => {
-      platform.draw();
-    });
-    //platform.draw();
+  
     // ! movement rules
-    if (keys.right.pressed && player.position.x < 700) {
-      player.velocity.x = 5;
-    } else if (keys.left.pressed && player.position.x > 5) {
-      player.velocity.x = -5;
+    const playerSpeed = 10
+    
+    if (keys.right.pressed && player.position.x < 300) {
+      player.velocity.x = playerSpeed;
+    } else if (keys.left.pressed && player.position.x > 300) {
+      player.velocity.x = -playerSpeed;
     } else {
       player.velocity.x = 0;
 
       if (keys.right.pressed) {
-        platforms.forEach((platform) => {
-          platform.position.x -= 5;
+        backgroundX -= playerSpeed;
+        boundaries.forEach((boundary) => {
+          boundary.position.x -= playerSpeed;
         });
       } else if (keys.left.pressed) {
-        platforms.forEach((platform) => {
-          platform.position.x += 5;
+        backgroundX += playerSpeed;
+        boundaries.forEach((boundary) => {
+          boundary.position.x += playerSpeed;
         });
       }
     }
     // !collision
-    platforms.forEach((platform) => {
+    boundaries.forEach((boundary) => {
+      //top
       if (
-        player.position.y + player.height <= platform.position.y &&
+        player.position.y + player.height <= boundary.position.y &&
         player.position.y + player.height + player.velocity.y >=
-          platform.position.y &&
-        player.position.x + player.width >= platform.position.x &&
-        player.position.x <= platform.position.x + platform.width
+          boundary.position.y &&
+        player.position.x + player.width >= boundary.position.x &&
+        player.position.x <= boundary.position.x + boundary.width
       ) {
         player.velocity.y = 0;
       }
+      //bottom
+      if (
+        player.position.y >= boundary.position.y + boundary.height &&
+        player.position.y + player.velocity.y <=
+          boundary.position.y + boundary.height &&
+        player.position.x + player.width >= boundary.position.x &&
+        player.position.x <= boundary.position.x + boundary.width &&
+        player.position.y + player.height >= boundary.position.y
+      ) {
+        player.velocity.y = 0;
+      }
+      //!left
+      if (
+        player.position.x + player.velocity.x <= boundary.position.x + boundary.width &&
+        player.position.x + player.width + player.velocity.x >= boundary.position.x &&
+        player.position.y + player.height >= boundary.position.y &&
+        player.position.y <= boundary.position.y + boundary.height
+      ) {
+        player.position.x = boundary.position.x + boundary.width;
+        player.velocity.x = 0;
+      }
+      
+      // !right
+      if (
+        player.position.x + player.velocity.x + player.width >= boundary.position.x &&
+        player.position.x + player.velocity.x <= boundary.position.x + boundary.width &&
+        player.position.y + player.height >= boundary.position.y &&
+        player.position.y <= boundary.position.y + boundary.height
+      ) {
+        player.position.x = boundary.position.x - player.width;
+        player.velocity.x = +1;
+      }
     });
   }
+
   animate();
-
-
-
-
 });
