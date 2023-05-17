@@ -1,4 +1,64 @@
-<div>
+<header>
+    <h1>Dungeon Game</h1>
+</header>
+<div class="profileContainer">
+    <div class="subContainer">
+        <div class="modal">
+            <h1>Avatar</h1>
+        </div> {{! avatar idle animation, play button (maybe after choosing different avatar?)}}
+        <div id="profile" class="modal">
+            <h1>Profile</h1>
+            <div id="profileInfo">
+                <div class="subModal">
+                    <ul>
+                        <li>Username: placeholder</li>
+                        <li>Email: example@email.com</li>
+                        <li>Date Created: 00/00/0000</li>
+                    </ul>
+                </div>
+                <div id="buttons" class="subModal">
+                    <ul>
+                        <li><button class="button">Play</button></li>
+                        <li><button class="button">Save</button></li>
+                        <li><button class="button">Log Out</button></li>
+                    </ul>
+                </div>
+            </div>
+        </div> {{! profile stuffs (profile info, save files, log out button, deaths, time played, high score}}
+    </div>
+    <div class="subContainer">
+        <div id="controls" class="modal">
+            <h1>Controls</h1>
+            <ul>
+                <li>Move Left: LEFT Arrow / A</li>
+                <li>Move Right: RIGHT Arrow / D</li>
+                <li>Jump: UP Arrow / W</li>
+                <li>Attack: SPACE BAR</li>
+            </ul>
+        </div> {{! controls}}
+        <div id="stats" class="modal">
+            <h1>Profile</h1>
+            <div id="profileInfo">
+                <div class="subModal">
+                    <ul>
+                        <li>Time Played: 00m 00s</li>
+                        <li>Deaths: 00</li>
+                        <li>Jumps: 00</li>
+                    </ul>
+                </div>
+                <div class="subModal">
+                    <ul>
+                        <li>High Score: 0000</li>
+                        <li>Total Score: 000000</li>
+                        <li>Extra: 0000</li>
+                    </ul>
+                </div>
+            </div>
+        </div> {{! time played, deaths, high scores, total score, jumps, extra}}
+    </div>
+</div>
+
+{{!-- <div>
     <nav>
         <ul>
             <li><a>Save/ Load</a></li>
@@ -11,4 +71,4 @@
         <h2>Profile</h2>
     </div>
 
-</div>
+</div> --}}
