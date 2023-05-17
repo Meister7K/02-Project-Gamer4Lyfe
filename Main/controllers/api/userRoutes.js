@@ -1,11 +1,15 @@
+const User = require('../../models/User'); 
 const router = require('express').Router();
-const { User } = require('../../models');   //I never know if im selecting the right files with these imports. someone whos good at file paths hmu -will
+  
+
+//I never know if im selecting the right files with these imports. someone whos good at file paths hmu -will
 
 
 //create new user by visiting /api/user
 
 router.post('/', async (req, res) => {
     try {
+
       const userData = await User.create(req.body); //creates new user in the model
   
       req.session.save(() => {
