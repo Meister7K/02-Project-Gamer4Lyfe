@@ -6,25 +6,25 @@
         <div class="welcome-buttons">
             <div class="inputContainer">
                 <div class="title"><h1>Log In</h1></div>
-                    <form>
-                        <input class="userBox" type="text" id="userEmail" name="email" placeholder="Username or Email">
+                    <form id="loginForm">
+                        <input class="userBox" type="text" id="userEmail" name="email" placeholder="Email">
                         {{!-- <input class="emailBox" type="email" id="email" name="email" placeholder="Email"> --}}
-                        <input class="passBox" type="password" id="pass" name="password" placeholder="Password">
+                        <input class="passBox" type="password" id="userPass" name="password" placeholder="Password">
                         <button id="logInButton" class="button" type="submit">Log In</button>
                     </form>
             </div>
             <div class="inputContainerSu">
                 <div class="title"><h1>Sign Up</h1></div>
-                    <form>
+                    <form id="signupForm">
                         <input class="userBox" type="text" id="username" name="username" placeholder="Username">
                         <input class="emailBox" type="text" id="email" name="email" placeholder="Email">
                         <input class="passBox" type="password" id="pass" name="password" placeholder="Password">
-                        <input class="passBox" type="password" id="pass" name="password" placeholder="Confirm Password">
+                        <input class="passBox" type="password" id="conPass" name="conPassword" placeholder="Confirm Password">
                         <button id="signUpButton" class="button" type="submit">Sign Up</button>
                     </form>
             </div>
         </div>
     {{!-- </div> --}}
 </div>
-
+<script src="../public/js/login.js"></script>
 
