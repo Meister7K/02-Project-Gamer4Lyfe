@@ -12,6 +12,6 @@ backgroundLayer1.src = './image/layer-1.png';
 
 const playerImage = new Image();
 playerImage.src = './';
-const playerWidth = x;
-const playerHeight = x;
+//const playerWidth = x;
+//const playerHeight = x;
 
