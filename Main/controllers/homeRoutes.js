@@ -17,7 +17,7 @@ router.get('/', async(req, res) => {
     }
 })
 
-router.get('/play',withAuth,async(req,res)=> {
+router.get('/play', withAuth, async(req,res)=> { //!
     //loads game to page
     try{
         return res.render('game');
