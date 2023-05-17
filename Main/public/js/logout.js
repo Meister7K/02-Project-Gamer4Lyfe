@@ -52,4 +52,4 @@ const pause = async (event) => {
 
 };
 
-pauseBtn.addEventListener('click', pause);
+//pauseBtn.addEventListener('click', pause);

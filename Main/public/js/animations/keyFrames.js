@@ -128,23 +128,23 @@ fighterImg.animationStates=[
 
 
 
-// function animate() {
-//     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
-//     //ctx.drawImage(image,srcX,srcY,srcWid,srcHi, destX, destY, destWid, destHi)            full version
+function animate() {
+    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
+    //ctx.drawImage(image,srcX,srcY,srcWid,srcHi, destX, destY, destWid, destHi)            full version
     
-//     ctx.drawImage(fighterImg, fighterImg.spriteWidth*frame, 0, fighterImg.spriteWidth, fighterImg.spriteHeight, 0, 0, fighterImg.spriteWidth*5, fighterImg.spriteHeight*5)
-//     if(gameFrame%10===0){
-//         if (frame < 16)
-//             frame++
-//         else
-//             frame = 0
-//     }
-//     gameFrame++;
+    ctx.drawImage(fighterImg, fighterImg.spriteWidth*frame, 0, fighterImg.spriteWidth, fighterImg.spriteHeight, 0, 0, fighterImg.spriteWidth*5, fighterImg.spriteHeight*5)
+    if(gameFrame%10===0){
+        if (frame < 16)
+            frame++
+        else
+            frame = 0
+    }
+    gameFrame++;
         
 
 
-//     requestAnimationFrame(animate);
-// };
+    requestAnimationFrame(animate);
+};
 // animate();
 function addAllFrameLocations(character){
     for(let i=0;i<character.animationStates.length;i++){
@@ -158,7 +158,7 @@ function addAllFrameLocations(character){
         character.animationStates[i].loc=loc;
         
     }
-    character.animationStates=changeObjFormat(character)
+    //character.animationStates=changeObjFormat(character)
     
 }
 function changeObjFormat(character){

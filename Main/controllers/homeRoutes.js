@@ -6,7 +6,7 @@
 
 const router = require('express').Router();
 const withAuth = require('../utils/auth');
-const { User } = require('../models/User');
+const User  = require('../models/User');
 
 router.get('/', async(req, res) => {
     //homepage route
@@ -36,29 +36,26 @@ router.get('/settings',withAuth,async(req,res)=>{
 })
 
 
-router.get('/profile',async(req,res)=>{
+router.get('/profile',withAuth,async(req,res)=>{
     //checks for authorization then sends to profile
-    // try{
-    //     // Find the logged in user based on the session ID
-    //     const userData = await User.findByPk(req.session.user_id, {attributes: { exclude: ['password'] }}); //specify included and excluded data here
-  
-    //     const user = userData.get({ plain: true });  //parses userdata
-        
-    //     //sends off relevant user data to profile and sets them as logged in if they arent already
-    //     res.render('profile', {      
-    //         ...user,
-    //         logged_in: true
-    //     });
-    // } catch(err) {
-    //     res.status(500).json(err);
-    // }
     try{
-        console.log('hi');
-        return res.render('profile');
-    }catch{
+        // Find the logged in user based on the session ID
+        console.log(req.session.user_id)
+        const userData = await User.findByPk(req.session.user_id, {attributes: { exclude:['password'] }}); //specify included and excluded data here
+        console.log("got here")
+        console.log(userData)
+        const user = userData.get({ plain: true });  //parses userdata
+        console.log("get here too")
+        console.log(user)
+        //sends off relevant user data to profile and sets them as logged in if they arent already
+        res.render('profile', {      
+            ...user,
+            logged_in: true
+        });
+    } catch(err) {
         res.status(500).json(err);
     }
-})
+ })
 
 router.get('/saveGame',withAuth,async(req,res)=>{
     try{
