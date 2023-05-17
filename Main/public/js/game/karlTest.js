@@ -1,6 +1,11 @@
-console.log(collisions);
+// !Imports
+
+
+
+
 //! verify load first
 addEventListener("load", function () {
+    const player = new Player();
   //! const
 
   const canvas = document.getElementById("canvas1");
@@ -79,6 +84,7 @@ addEventListener("load", function () {
   });
 
   console.log(boundaries);
+  console.log(eventFrames);
   // class Background {
   //   constructor({ x, y, image }) {
   //     this.position = {
@@ -95,38 +101,38 @@ addEventListener("load", function () {
   //   }
   // }
 
-  //! character
-  class Player {
-    constructor() {
-      this.position = {
-        x: 85,
-        y: 1800,
-      };
-      this.velocity = {
-        x: 0,
-        y: 0,
-      };
+//   //! character
+//   class Player {
+//     constructor() {
+//       this.position = {
+//         x: 85,
+//         y: 1800,
+//       };
+//       this.velocity = {
+//         x: 0,
+//         y: 0,
+//       };
 
-      this.width = 16;
-      this.height = 32;
-    }
-    draw() {
-      ctx.fillStyle = "red";
-      ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
-    }
-    update() {
-      this.draw();
-      this.position.y += this.velocity.y;
-      this.position.x += this.velocity.x;
-      if (this.position.y + this.height + this.velocity.y <= CANVAS_HEIGHT) {
-        this.velocity.y += gravity;
-      } else {
-        this.velocity.y = 0;
-      }
-    }
-  }
+//       this.width = 16;
+//       this.height = 32;
+//     }
+//     draw() {
+//       ctx.fillStyle = "red";
+//       ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+//     }
+//     update() {
+//       this.draw();
+//       this.position.y += this.velocity.y;
+//       this.position.x += this.velocity.x;
+//       if (this.position.y + this.height + this.velocity.y <= CANVAS_HEIGHT) {
+//         this.velocity.y += gravity;
+//       } else {
+//         this.velocity.y = 0;
+//       }
+//     }
+//   }
 
-  const player = new Player();
+//   const player = new Player();
 
   // ! movement
   const keys = {
