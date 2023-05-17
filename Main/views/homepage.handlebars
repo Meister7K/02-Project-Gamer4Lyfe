@@ -1,8 +1,7 @@
-
 <div class="main-container">
     <div class="sub-container">
         <header>
-            <h1>An Awesome Game Title</h1>
+            <h1>Dungeon Game</h1>
         </header>
         <div class="welcome-buttons">
             <div class="form-grid">
@@ -13,12 +12,12 @@
                 <form id="logForm" class="log-form" action="/Main/views/profile.handlebars" method="post">
                     <div>
                         <label for="username">Username:</label>
-                        <input class="userBox ub_error" type="text" id="username" name="username" placeholder="Username">
+                         <input class="emailBox eb_error" type="email" id="userEmail" name="email" placeholder="Email">
+                        {{!-- <input class="userBox ub_error" type="text" id="username" name="username" placeholder="Username"> --}}
                     </div>
-                    <input class="emailBox eb_error" type="email" id="email" name="email" placeholder="Email">
                     <div>
                         <label for="password">Password:</label>
-                        <input class="passBox pb_error" type="password" id="pass" name="password" placeholder="Password">
+                        <input class="passBox pb_error" type="password" id="userPass" name="password" placeholder="Password">
                     </div>
                     <button id="logInButton" class="button" type="submit">Log In</button>
                 </form>
@@ -30,20 +29,19 @@
                 <form id="signForm" class="sign-form" action="/" method="get">
                     <div>
                         <label for="username">Username:</label>
-                        <input class="userBox" type="text" id="usernameTwo" name="username" placeholder="Username">
+                        <input class="userBox" type="text" id="username" name="username" placeholder="Username">
                     </div>
                     <div>
                         <label for="email">Email:</label>
-                        <input class="emailBox" type="text" id="emailTwo" name="email" placeholder="Email">
+                        <input class="emailBox" type="text" id="email" name="email" placeholder="Email">
                     </div>
                     <div>
                         <label for="password">Password:</label>
-                        <input class="passBox" type="password" id="passTwo" name="password" placeholder="Password">
+                        <input class="passBox" type="password" id="pass" name="password" placeholder="Password">
                     </div>
-                    <label for="requirement"><span>8 character minimum</span></label>
                     <div>
                         <label for="confirmation">Confirm Password:</label>
-                        <input class="passBox" type="password" id="passTwoConfirm" name="password" placeholder="Confirm Password">
+                        <input class="passBox" type="password" id="conPass" name="password" placeholder="Confirm Password">
                     </div>
                     <button id="signUpButton" class="button" type="submit">Sign Up</button>
                 </form>
@@ -54,5 +52,3 @@
 </div>
 {{!-- login.js link --}}
 <script src="/Main/public/js/login.js"></script>
-
-
