@@ -36,20 +36,26 @@ router.get('/settings',withAuth,async(req,res)=>{
 })
 
 
-router.get('/profile',withAuth,async(req,res)=>{
+router.get('/profile',async(req,res)=>{
     //checks for authorization then sends to profile
-    try{
-        // Find the logged in user based on the session ID
-        const userData = await User.findByPk(req.session.user_id, {attributes: { exclude: ['password'] }}); //specify included and excluded data here
+    // try{
+    //     // Find the logged in user based on the session ID
+    //     const userData = await User.findByPk(req.session.user_id, {attributes: { exclude: ['password'] }}); //specify included and excluded data here
   
-        const user = userData.get({ plain: true });  //parses userdata
+    //     const user = userData.get({ plain: true });  //parses userdata
         
-        //sends off relevant user data to profile and sets them as logged in if they arent already
-        res.render('profile', {      
-            ...user,
-            logged_in: true
-        });
-    } catch{
+    //     //sends off relevant user data to profile and sets them as logged in if they arent already
+    //     res.render('profile', {      
+    //         ...user,
+    //         logged_in: true
+    //     });
+    // } catch(err) {
+    //     res.status(500).json(err);
+    // }
+    try{
+        console.log('hi');
+        return res.render('profile');
+    }catch{
         res.status(500).json(err);
     }
 })
@@ -71,7 +77,7 @@ router.get('/login', (req, res) => {
       return;
     }
   
-    res.render('/homepage');  //send back to homepage (login?)
+    res.render('homepage');  //send back to homepage (login?)
   });
 
 // post for sign up and login

@@ -5,7 +5,7 @@
     <div class="subContainer">
         <div class="modal">
             <h1>Avatar</h1>
-        </div> {{! avatar idle animation, play button (maybe after choosing different avatar?)}}
+        </div>
         <div id="profile" class="modal">
             <h1>Profile</h1>
             <div id="profileInfo">
@@ -18,13 +18,13 @@
                 </div>
                 <div id="buttons" class="subModal">
                     <ul>
-                        <li><button class="button">Play</button></li>
+                        <li><button id="play" class="button">Play</button></li>
                         <li><button class="button">Save</button></li>
-                        <li><button class="button">Log Out</button></li>
+                        <li><button id="logout" class="button">Log Out</button></li>
                     </ul>
                 </div>
             </div>
-        </div> {{! profile stuffs (profile info, save files, log out button, deaths, time played, high score}}
+        </div>
     </div>
     <div class="subContainer">
         <div id="controls" class="modal">
@@ -35,7 +35,7 @@
                 <li>Jump: UP Arrow / W</li>
                 <li>Attack: SPACE BAR</li>
             </ul>
-        </div> {{! controls}}
+        </div>
         <div id="stats" class="modal">
             <h1>Profile</h1>
             <div id="profileInfo">
@@ -54,21 +54,9 @@
                     </ul>
                 </div>
             </div>
-        </div> {{! time played, deaths, high scores, total score, jumps, extra}}
+        </div>
     </div>
 </div>
 
-{{!-- <div>
-    <nav>
-        <ul>
-            <li><a>Save/ Load</a></li>
-            <li><a>Profile</a></li>
-            <li><a>Settings</a></li>
-            <li><a>Controls</a></li>
-        </ul>
-    </nav>
-    <div>
-        <h2>Profile</h2>
-    </div>
-
-</div> --}}
+<script src="/js/logout.js"></script>
+<script src="/js/profile.js"></script>

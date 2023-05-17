@@ -238,10 +238,6 @@ ul {
     flex-direction: column;
 }
 
-#statsInfo {
-    
-}
-
 ::placeholder {
     color: #272727;
 }
