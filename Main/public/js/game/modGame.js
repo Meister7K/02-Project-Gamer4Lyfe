@@ -168,6 +168,7 @@ class Controller {
         }
     }
     detectCollision(){
+        
         this.colMap.forEach((boundary) => {
             //top
             console.log('bound' + boundary);
@@ -181,7 +182,7 @@ class Controller {
               this.player.velocity.y = 0;
             }
             //bottom
-            if (
+            else if (
               this.player.y >= boundary.y + boundary.height &&
               this.player.y + this.player.velocity.y <=
                 boundary.y + boundary.height &&
@@ -191,6 +192,29 @@ class Controller {
             ) {
               this.player.velocity.y = 0;
             }
+            // !Left
+            else if (
+                this.player.x + this.player.velocity.x <= boundary.x + boundary.width &&
+                this.player.x + this.player.width + this.player.velocity.x >= boundary.x &&
+                this.player.y + this.player.height >= boundary.y &&
+                this.player.y <= boundary.y + boundary.height
+              ) {
+                this.player.x = boundary.x + boundary.width;
+                this.player.velocity.x = 0;
+                
+              }
+              
+              // !right
+              else if (
+                this.player.x + this.player.velocity.x + this.player.width >= boundary.x &&
+                this.player.x + this.player.velocity.x <= boundary.x + boundary.width &&
+                this.player.y + this.player.height >= boundary.y &&
+                this.player.y <= boundary.y + boundary.height
+              ) {
+                this.player.x = boundary.x - this.player.width;
+                this.player.velocity.x = 0;
+                
+              }
     
     
         })
@@ -199,7 +223,7 @@ class Controller {
     }
     updatePlayer() {
         const ps = 10;
-        this.detectCollision()
+        
         if (this.right)
             this.player.velocity.x = ps;
         else if (this.left)
@@ -289,6 +313,7 @@ function animate() {
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     level1.draw()
     character1.update()
+    controller.detectCollision()
     //loadLevel(level1,character1)
     requestAnimationFrame(animate);
 }
