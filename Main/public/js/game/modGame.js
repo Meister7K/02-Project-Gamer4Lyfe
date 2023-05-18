@@ -16,6 +16,9 @@ const gravity = 1.5;
 
 
 
+    
+
+
 
 
 
@@ -32,6 +35,14 @@ class Block {
         this.height=size;
         this.type = type;
 
+    }
+    blockEvent(){
+        if(this.type==="sblock"){
+            //player stop
+        }
+        else if(this.type==="eblock"){
+            //loadlevel2
+        }
     }
 
 }
@@ -78,11 +89,12 @@ class Enemy extends Character {
 }
 
 class Controller {
-    constructor(aPlayer) {
+    constructor(aPlayer,colMap) {
         this.player = aPlayer
         this.right = false
         this.left = false
         this.interact = false
+        this.colMap=colMap
         this.renderController()
     }
     renderController() {
@@ -155,9 +167,39 @@ class Controller {
                 console.log("pause");
         }
     }
+    detectCollision(){
+        this.colMap.forEach((boundary) => {
+            //top
+            console.log('bound' + boundary);
+            if (
+              this.player.y + this.player.height <= boundary.y &&
+              this.player.y + this.player.height + this.player.velocity.y >=
+                boundary.y &&
+              this.player.x + this.player.width >= boundary.x &&
+              this.player.x <= boundary.x + boundary.width
+            ) {
+              this.player.velocity.y = 0;
+            }
+            //bottom
+            if (
+              this.player.y >= boundary.y + boundary.height &&
+              this.player.y + this.player.velocity.y <=
+                boundary.y + boundary.height &&
+              this.player.x + this.player.width >= boundary.x &&
+              this.player.x <= boundary.x + boundary.width &&
+              this.player.y + this.player.height >= boundary.y
+            ) {
+              this.player.velocity.y = 0;
+            }
+    
+    
+        })
+       
+    
+    }
     updatePlayer() {
         const ps = 10;
-
+        this.detectCollision()
         if (this.right)
             this.player.velocity.x = ps;
         else if (this.left)
@@ -239,7 +281,7 @@ function loadLevel (map) {
 
 const level1 = new Level("../images/DungeonRoom2.png", collisions01)
 const character1 = new Character(700,1000,16,32);
-const controller= new Controller(character1)
+const controller= new Controller(character1, level1.blockMap);
 console.log('char' + character1);
 
 
