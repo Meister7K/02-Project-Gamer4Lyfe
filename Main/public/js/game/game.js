@@ -96,7 +96,9 @@ function drawEnemies(){
 }
 
 function interact(){
-    if( currentMap === maps[0])
+    if( currentMap === maps[0]){
+        
+    }
 }
 
 });
