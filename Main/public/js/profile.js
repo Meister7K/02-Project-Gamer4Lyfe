@@ -10,6 +10,7 @@ playBtn.addEventListener('click', playGame);
 const saveBtn = document.querySelector('#save');
 const saveGame = (event) => {
     event.preventDefault();
+    console.log('save button pressed');
     // not sure what else goes here just yet
 }
 
