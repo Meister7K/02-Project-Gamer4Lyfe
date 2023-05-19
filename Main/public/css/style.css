@@ -54,8 +54,6 @@ form {
     justify-content: center;
 }
 
-
-
 /* the second block within the first */
 /* holds the grid that will make webpage responsive */
 /* .sub-container {
@@ -123,6 +121,16 @@ form {
     background-color: #9c8130;
     height: 50%;
     width: 100%;
+    font-size: 2.5rem;
+}
+
+.gameButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #9c8130;
+    height: 4.6rem;
+    width: 15%;
     font-size: 2.5rem;
 }
 
