@@ -56,7 +56,7 @@ addEventListener("load", function () {
       this.height = 64;
     }
   }
-
+//
   const boundaries = [];
   const eventFrames = [];
 
@@ -215,7 +215,7 @@ addEventListener("load", function () {
     player.update();
   
     // ! movement rules
-    const playerSpeed = 10
+    const playerSpeed = 10;
     
     if (keys.right.pressed && player.position.x < 300) {
       player.velocity.x = playerSpeed;
@@ -277,7 +277,7 @@ addEventListener("load", function () {
       }
       
       // !right
-      else if (
+      if (
         player.position.x + player.velocity.x + player.width >= boundary.position.x &&
         player.position.x + player.velocity.x <= boundary.position.x + boundary.width &&
         player.position.y + player.height >= boundary.position.y &&
