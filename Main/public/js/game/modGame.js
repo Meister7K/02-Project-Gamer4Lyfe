@@ -179,9 +179,10 @@ class Controller {
               ) {
              
                 this.player.velocity.y = 0;
+                boundary.blockEvent()
               }
               //bottom box
-              if (
+              if (this.player.velocity.y<=0 &&
                 this.player.y >= boundary.y + boundary.height &&
                 this.player.y + this.player.velocity.y <=
                   boundary.y + boundary.height &&
@@ -190,7 +191,9 @@ class Controller {
                 this.player.y + this.player.height >= boundary.y
               ) {
                 console.log("hitting the ceiling")
+                this.player.y = boundary.y + boundary.height +1;
                 this.player.velocity.y = 0;
+                boundary.blockEvent()
               }
               //!left player/ right box
               if(this.player.velocity.x<0 &&
@@ -200,9 +203,9 @@ class Controller {
                 this.player.y <= boundary.y + boundary.height
               ) {
                 //console.log("cant go left")
-                this.player.x = boundary.x + boundary.width +1 ;//! changed boundary w to player w
+                this.player.x = boundary.x + boundary.width +1 ;
                 this.player.velocity.x = 0;
-                
+                boundary.blockEvent()
               }
               
               // left box / right player
@@ -215,6 +218,7 @@ class Controller {
                 console.log("cant go right")
                 this.player.x = boundary.x - this.player.width -1;
                 this.player.velocity.x = 0;
+                boundary.blockEvent()
                 
               }
 
@@ -248,7 +252,8 @@ class Level {
         this.Y = 0;
         this.imgObj = this.renderImg();
         this.colMap = colMap;
-        this.blockMap = this.renderBlockMap()
+        this.blockMap = this.renderCollisionBlockMap()
+        this.eBlockMap=this.renderEventBlockMap()
     }
 
     draw() {
@@ -258,23 +263,39 @@ class Level {
             ctx.fillStyle = "blue";
             ctx.fillRect(this.blockMap[i].x, this.blockMap[i].y, this.blockMap[i].width, this.blockMap[i].height);
         }
+        for (let i = 0; i < this.eBlockMap.length; i++) {
+
+            ctx.fillStyle = "green";
+            ctx.fillRect(this.eBlockMap[i].x, this.eBlockMap[i].y, this.eBlockMap[i].width, this.eBlockMap[i].height);
+        }
 
     }
-    renderBlockMap() {
-        let blockArray = []
+    renderCollisionBlockMap() {
+        let blockArray = [];
         this.colMap.forEach((row, i) => {
             row.forEach((num, j) => {
                 if (num === 1 || num === 3) {
                     let block = new Block(j, i, 'sblock')
                     blockArray.push(block)
                 }
-                else if (num === 2) {
-                    let block = new Block(j, i, 'eblock')
-                    blockArray.push(block);
-                }
+              
             })
         })
         return blockArray;
+    }
+    renderEventBlockMap(){
+        let eBlockArray = [];
+        this.colMap.forEach((row, i) => {
+            row.forEach((num, j) => {
+
+                if (num === 2) {
+                    let block = new Block(j, i, 'eblock')
+                    eBlockArray.push(block);
+                }
+            })
+        })
+        return eBlockArray;
+        
     }
     renderImg() {
         const backgroundImage = new Image()
@@ -282,6 +303,7 @@ class Level {
         // this.blockMap=this.renderBlockMap()
         return backgroundImage;
     }
+    
 }
 
 
