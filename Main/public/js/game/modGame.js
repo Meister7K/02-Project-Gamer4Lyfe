@@ -170,20 +170,35 @@ class Controller {
     detectCollision(){
         
         this.colMap.forEach((boundary) => {
+            // let playerTop=this.player.y;
+            // let playerBottom=this.player.y+this.player.height;
+            // let playerLeft=this.player.x;
+            // let playerRight=this.player.x+this.player.width
+
+            // let boundaryTop=this.boundary.y;
+            // let boundaryBottom=this.boundary.y+this.boundary.height;
+            // let boundaryLeft=this.boundary.x;
+            // let boundaryRight=this.boundary.x+this.boundary.width            
             //top
-            console.log('bound' + boundary);
+            
             if (
               this.player.y + this.player.height <= boundary.y &&
-              this.player.y + this.player.height + this.player.velocity.y >=
-                boundary.y &&
-              this.player.x + this.player.width >= boundary.x &&
-              this.player.x <= boundary.x + boundary.width
+              this.player.y + this.player.height + this.player.velocity.y >= boundary.y &&
+               this.player.x + this.player.width >= boundary.x &&
+               this.player.x <= boundary.x + boundary.width
+
+
+            //    this.player.y <= boundary.y+boundary.height &&
+            //   this.player.y + this.player.velocity.y <=
+            //     boundary.y+boundary.height &&
+            //    this.player.x + this.player.width >= boundary.x &&
+            //    this.player.x <= boundary.x + boundary.width
             ) {
               this.player.velocity.y = 0;
             }
             //bottom
-            else if (
-              this.player.y >= boundary.y + boundary.height &&
+            if (
+              this.player.y <= boundary.y + boundary.height &&
               this.player.y + this.player.velocity.y <=
                 boundary.y + boundary.height &&
               this.player.x + this.player.width >= boundary.x &&
@@ -193,25 +208,25 @@ class Controller {
               this.player.velocity.y = 0;
             }
             // !Left
-            else if (
+            if (
                 this.player.x + this.player.velocity.x <= boundary.x + boundary.width &&
                 this.player.x + this.player.width + this.player.velocity.x >= boundary.x &&
                 this.player.y + this.player.height >= boundary.y &&
                 this.player.y <= boundary.y + boundary.height
               ) {
-                this.player.x = boundary.x + boundary.width;
+                this.player.x = boundary.x - boundary.width;
                 this.player.velocity.x = 0;
                 
               }
               
               // !right
-              else if (
+            if (
                 this.player.x + this.player.velocity.x + this.player.width >= boundary.x &&
                 this.player.x + this.player.velocity.x <= boundary.x + boundary.width &&
                 this.player.y + this.player.height >= boundary.y &&
                 this.player.y <= boundary.y + boundary.height
               ) {
-                this.player.x = boundary.x - this.player.width;
+                this.player.x = boundary.x + this.player.width;
                 this.player.velocity.x = 0;
                 
               }

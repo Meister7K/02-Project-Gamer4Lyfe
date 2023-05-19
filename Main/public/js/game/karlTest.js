@@ -275,7 +275,7 @@ addEventListener("load", function () {
       }
       
       // !right
-      else if (
+      if (
         player.position.x + player.velocity.x + player.width >= boundary.position.x &&
         player.position.x + player.velocity.x <= boundary.position.x + boundary.width &&
         player.position.y + player.height >= boundary.position.y &&
