@@ -96,10 +96,6 @@ addEventListener("load", function () {
   // }
 
   //! character
-  
-  
-  
-  
   class Player {
     constructor() {
       this.position = {

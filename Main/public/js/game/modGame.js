@@ -16,7 +16,7 @@ const gravity = 1.5;
 
 
 
-    
+
 
 
 
@@ -25,22 +25,22 @@ const gravity = 1.5;
 //collisions1[x][y] if=1 stop if 2 changelevel 3
 
 class Block {
-    
-    constructor(x,y,type,size=64) {
+
+    constructor(x, y, type, size = 64) {
 
         this.size = size;
-        this.x=x*size;
-        this.y=y*size;
-        this.width=size;
-        this.height=size;
+        this.x = x * size;
+        this.y = y * size;
+        this.width = size;
+        this.height = size;
         this.type = type;
 
     }
-    blockEvent(){
-        if(this.type==="sblock"){
+    blockEvent() {
+        if (this.type === "sblock") {
             //player stop
         }
-        else if(this.type==="eblock"){
+        else if (this.type === "eblock") {
             //loadlevel2
         }
     }
@@ -57,8 +57,8 @@ class Character {
         };
         this.width = w;
         this.height = h;
-       // this.health = health;
-       //this.sprite = sprite;
+        // this.health = health;
+        //this.sprite = sprite;
     }
     draw() {
         ctx.fillStyle = "red";
@@ -77,7 +77,7 @@ class Character {
 }
 class Player extends Character {
     constructor() {
-        super(x, y, w, h, sprite="")
+        super(x, y, w, h, sprite = "")
     }
 }
 
@@ -89,12 +89,12 @@ class Enemy extends Character {
 }
 
 class Controller {
-    constructor(aPlayer,colMap) {
+    constructor(aPlayer, colMap) {
         this.player = aPlayer
         this.right = false
         this.left = false
         this.interact = false
-        this.colMap=colMap
+        this.colMap = colMap
         this.renderController()
     }
     renderController() {
@@ -108,33 +108,33 @@ class Controller {
 
     }
     checkKeyDown(keyCode) {
-        console.log(keyCode);
+        // console.log(keyCode);
         switch (keyCode) {
             case 38 || 87:
                 //!edit to if touching ground is true
                 if (this.player.velocity.y === 0) {
                     this.player.velocity.y -= 20;
                 }
-                console.log("up");
+                // console.log("up");
                 break;
 
             case 40 || 83:
-                console.log("interact");
+                // console.log("interact");
                 this.interact = true //make interaction for opening doors
                 this.updatePlayer();
                 break;
             case 37 || 65:
-                console.log("left");
+                
                 this.left = true;
                 this.updatePlayer();
                 break;
             case 39 || 68:
-                console.log("right");
+                
                 this.right = true;
                 this.updatePlayer();
                 break;
             case 32:
-                console.log("attack");
+                
                 break;
         }
 
@@ -143,102 +143,87 @@ class Controller {
     checkKeyUp(keyCode) {
         switch (keyCode) {
             case 38 || 87:
-                console.log("up");
+                // console.log("up");
                 break;
             case 40 || 83:
                 this.interact = false;
                 this.updatePlayer();
-                console.log("down");
+                // console.log("down");
                 break;
             case 37 || 65:
-                console.log("left");
+                // console.log("left");
                 this.left = false;
                 this.updatePlayer();
                 break;
             case 39 || 68:
-                console.log("right");
+                // console.log("right");
                 this.right = false;
                 this.updatePlayer();
                 break;
             case 32:
-                console.log("attack");
+                // console.log("attack");
                 break;
             case 44:
-                console.log("pause");
+                // console.log("pause");
         }
     }
-    detectCollision(){
-        
+    detectCollision() {
+
         this.colMap.forEach((boundary) => {
-            // let playerTop=this.player.y;
-            // let playerBottom=this.player.y+this.player.height;
-            // let playerLeft=this.player.x;
-            // let playerRight=this.player.x+this.player.width
 
-            // let boundaryTop=this.boundary.y;
-            // let boundaryBottom=this.boundary.y+this.boundary.height;
-            // let boundaryLeft=this.boundary.x;
-            // let boundaryRight=this.boundary.x+this.boundary.width            
-            //top
-            
             if (
-              this.player.y + this.player.height <= boundary.y &&
-              this.player.y + this.player.height + this.player.velocity.y >= boundary.y &&
-               this.player.x + this.player.width >= boundary.x &&
-               this.player.x <= boundary.x + boundary.width
-
-
-            //    this.player.y <= boundary.y+boundary.height &&
-            //   this.player.y + this.player.velocity.y <=
-            //     boundary.y+boundary.height &&
-            //    this.player.x + this.player.width >= boundary.x &&
-            //    this.player.x <= boundary.x + boundary.width
-            ) {
-              this.player.velocity.y = 0;
-            }
-            //bottom
-            if (
-              this.player.y <= boundary.y + boundary.height &&
-              this.player.y + this.player.velocity.y <=
-                boundary.y + boundary.height &&
-              this.player.x + this.player.width >= boundary.x &&
-              this.player.x <= boundary.x + boundary.width &&
-              this.player.y + this.player.height >= boundary.y
-            ) {
-              this.player.velocity.y = 0;
-            }
-            // !Left
-            if (
+                this.player.y + this.player.height <= boundary.y &&
+                this.player.y + this.player.height + this.player.velocity.y >=boundary.y &&
+                this.player.x + this.player.width >= boundary.x &&
+                this.player.x <= boundary.x + boundary.width
+              ) {
+             
+                this.player.velocity.y = 0;
+              }
+              //bottom box
+              if (
+                this.player.y >= boundary.y + boundary.height &&
+                this.player.y + this.player.velocity.y <=
+                  boundary.y + boundary.height &&
+                this.player.x + this.player.width >= boundary.x &&
+                this.player.x <= boundary.x + boundary.width &&
+                this.player.y + this.player.height >= boundary.y
+              ) {
+                console.log("hitting the ceiling")
+                this.player.velocity.y = 0;
+              }
+              //!left player/ right box
+              if(this.player.velocity.x<0 &&
                 this.player.x + this.player.velocity.x <= boundary.x + boundary.width &&
                 this.player.x + this.player.width + this.player.velocity.x >= boundary.x &&
                 this.player.y + this.player.height >= boundary.y &&
                 this.player.y <= boundary.y + boundary.height
               ) {
-                this.player.x = boundary.x - boundary.width;
+                //console.log("cant go left")
+                this.player.x = boundary.x + boundary.width +1 ;//! changed boundary w to player w
                 this.player.velocity.x = 0;
                 
               }
               
-              // !right
-            if (
+              // left box / right player
+              if (this.player.velocity.x>0 &&
                 this.player.x + this.player.velocity.x + this.player.width >= boundary.x &&
                 this.player.x + this.player.velocity.x <= boundary.x + boundary.width &&
                 this.player.y + this.player.height >= boundary.y &&
                 this.player.y <= boundary.y + boundary.height
               ) {
-                this.player.x = boundary.x + this.player.width;
+                console.log("cant go right")
+                this.player.x = boundary.x - this.player.width -1;
                 this.player.velocity.x = 0;
                 
               }
-    
-    
-        })
-       
-    
-    }
+
+
+    })
+}
     updatePlayer() {
         const ps = 10;
-        
+
         if (this.right)
             this.player.velocity.x = ps;
         else if (this.left)
@@ -263,31 +248,31 @@ class Level {
         this.Y = 0;
         this.imgObj = this.renderImg();
         this.colMap = colMap;
-        this.blockMap=this.renderBlockMap()
+        this.blockMap = this.renderBlockMap()
     }
-    
+
     draw() {
         ctx.drawImage(this.imgObj, this.X, this.Y)
-        for( let i=0;i<this.blockMap.length;i++){
-            
+        for (let i = 0; i < this.blockMap.length; i++) {
+
             ctx.fillStyle = "blue";
             ctx.fillRect(this.blockMap[i].x, this.blockMap[i].y, this.blockMap[i].width, this.blockMap[i].height);
         }
-    
+
     }
     renderBlockMap() {
-        let blockArray=[]        
+        let blockArray = []
         this.colMap.forEach((row, i) => {
             row.forEach((num, j) => {
-                if(num===1 || num === 3 ){
-                    let block=new Block(j,i,'sblock')
+                if (num === 1 || num === 3) {
+                    let block = new Block(j, i, 'sblock')
                     blockArray.push(block)
                 }
-                else if( num===2){
-                    let block=new Block(j,i, 'eblock')
+                else if (num === 2) {
+                    let block = new Block(j, i, 'eblock')
                     blockArray.push(block);
                 }
-                })
+            })
         })
         return blockArray;
     }
@@ -301,17 +286,17 @@ class Level {
 
 
 
-function loadLevel (map) {
+function loadLevel(map) {
     map.imgObj.onload = () => {
         ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
         map.draw()
         console.log('map' + map)
 
-    
+
     }
-}  
-    // add background/map img on load then draw
-    
+}
+// add background/map img on load then draw
+
 
 
 
@@ -319,8 +304,8 @@ function loadLevel (map) {
 //Active Code Below
 
 const level1 = new Level("../images/DungeonRoom2.png", collisions01)
-const character1 = new Character(700,1000,16,32);
-const controller= new Controller(character1, level1.blockMap);
+const character1 = new Character(700, 1000, 16, 32);
+const controller = new Controller(character1, level1.blockMap);
 console.log('char' + character1);
 
 
