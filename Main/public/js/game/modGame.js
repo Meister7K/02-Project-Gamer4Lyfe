@@ -124,17 +124,17 @@ class Controller {
                 this.updatePlayer();
                 break;
             case 37 || 65:
-                
+
                 this.left = true;
                 this.updatePlayer();
                 break;
             case 39 || 68:
-                
+
                 this.right = true;
                 this.updatePlayer();
                 break;
             case 32:
-                
+
                 break;
         }
 
@@ -164,67 +164,9 @@ class Controller {
                 // console.log("attack");
                 break;
             case 44:
-                // console.log("pause");
+            // console.log("pause");
         }
     }
-    detectCollision() {
-
-        this.colMap.forEach((boundary) => {
-
-            if (
-                this.player.y + this.player.height <= boundary.y &&
-                this.player.y + this.player.height + this.player.velocity.y >=boundary.y &&
-                this.player.x + this.player.width >= boundary.x &&
-                this.player.x <= boundary.x + boundary.width
-              ) {
-             
-                this.player.velocity.y = 0;
-                boundary.blockEvent()
-              }
-              //bottom box
-              if (this.player.velocity.y<=0 &&
-                this.player.y >= boundary.y + boundary.height &&
-                this.player.y + this.player.velocity.y <=
-                  boundary.y + boundary.height &&
-                this.player.x + this.player.width >= boundary.x &&
-                this.player.x <= boundary.x + boundary.width &&
-                this.player.y + this.player.height >= boundary.y
-              ) {
-                console.log("hitting the ceiling")
-                this.player.y = boundary.y + boundary.height +1;
-                this.player.velocity.y = 0;
-                boundary.blockEvent()
-              }
-              //!left player/ right box
-              if(this.player.velocity.x<0 &&
-                this.player.x + this.player.velocity.x <= boundary.x + boundary.width &&
-                this.player.x + this.player.width + this.player.velocity.x >= boundary.x &&
-                this.player.y + this.player.height >= boundary.y &&
-                this.player.y <= boundary.y + boundary.height
-              ) {
-                //console.log("cant go left")
-                this.player.x = boundary.x + boundary.width +1 ;
-                this.player.velocity.x = 0;
-                boundary.blockEvent()
-              }
-              
-              // left box / right player
-              if (this.player.velocity.x>0 &&
-                this.player.x + this.player.velocity.x + this.player.width >= boundary.x &&
-                this.player.x + this.player.velocity.x <= boundary.x + boundary.width &&
-                this.player.y + this.player.height >= boundary.y &&
-                this.player.y <= boundary.y + boundary.height
-              ) {
-                console.log("cant go right")
-                this.player.x = boundary.x - this.player.width -1;
-                this.player.velocity.x = 0;
-                boundary.blockEvent()
-                
-              }
-
-
-    })
-}
     updatePlayer() {
         const ps = 10;
 
@@ -243,8 +185,8 @@ class Controller {
 //currentpos-startpos % 64      colmasppos[x][y]
 
 class Level {
-    constructor(imgUrl, colMap) {
-
+    constructor(imgUrl, colMap, player) {
+        this.player = player;
         this.imgUrl = imgUrl;
         this.width = 3200
         this.height = 1920
@@ -253,19 +195,19 @@ class Level {
         this.imgObj = this.renderImg();
         this.colMap = colMap;
         this.blockMap = this.renderCollisionBlockMap()
-        this.eBlockMap=this.renderEventBlockMap()
+        this.eBlockMap = this.renderEventBlockMap()
     }
 
     draw() {
         ctx.drawImage(this.imgObj, this.X, this.Y)
         for (let i = 0; i < this.blockMap.length; i++) {
 
-            ctx.fillStyle = "blue";
+            ctx.fillStyle = "transparent";
             ctx.fillRect(this.blockMap[i].x, this.blockMap[i].y, this.blockMap[i].width, this.blockMap[i].height);
         }
         for (let i = 0; i < this.eBlockMap.length; i++) {
 
-            ctx.fillStyle = "green";
+            ctx.fillStyle = "transparent";
             ctx.fillRect(this.eBlockMap[i].x, this.eBlockMap[i].y, this.eBlockMap[i].width, this.eBlockMap[i].height);
         }
 
@@ -278,12 +220,12 @@ class Level {
                     let block = new Block(j, i, 'sblock')
                     blockArray.push(block)
                 }
-              
+
             })
         })
         return blockArray;
     }
-    renderEventBlockMap(){
+    renderEventBlockMap() {
         let eBlockArray = [];
         this.colMap.forEach((row, i) => {
             row.forEach((num, j) => {
@@ -295,7 +237,7 @@ class Level {
             })
         })
         return eBlockArray;
-        
+
     }
     renderImg() {
         const backgroundImage = new Image()
@@ -303,7 +245,78 @@ class Level {
         // this.blockMap=this.renderBlockMap()
         return backgroundImage;
     }
-    
+    detectCollision() {
+
+        this.blockMap.forEach((boundary) => {
+
+            if (
+                this.player.y + this.player.height <= boundary.y &&
+                this.player.y + this.player.height + this.player.velocity.y >= boundary.y &&
+                this.player.x + this.player.width >= boundary.x &&
+                this.player.x <= boundary.x + boundary.width
+            ) {
+
+                this.player.velocity.y = 0;
+                boundary.blockEvent()
+            }
+            //bottom box
+            if (this.player.velocity.y <= 0 &&
+                this.player.y >= boundary.y + boundary.height &&
+                this.player.y + this.player.velocity.y <=
+                boundary.y + boundary.height &&
+                this.player.x + this.player.width >= boundary.x &&
+                this.player.x <= boundary.x + boundary.width &&
+                this.player.y + this.player.height >= boundary.y
+            ) {
+                console.log("hitting the ceiling")
+                this.player.y = boundary.y + boundary.height + 1;
+                this.player.velocity.y = 0;
+                boundary.blockEvent()
+            }
+            //!left player/ right box
+            if (this.player.velocity.x < 0 &&
+                this.player.x + this.player.velocity.x <= boundary.x + boundary.width &&
+                this.player.x + this.player.width + this.player.velocity.x >= boundary.x &&
+                this.player.y + this.player.height >= boundary.y &&
+                this.player.y <= boundary.y + boundary.height
+            ) {
+                //console.log("cant go left")
+                this.player.x = boundary.x + boundary.width + 1;
+                this.player.velocity.x = 0;
+                boundary.blockEvent()
+            }
+
+            // left box / right player
+            if (this.player.velocity.x > 0 &&
+                this.player.x + this.player.velocity.x + this.player.width >= boundary.x &&
+                this.player.x + this.player.velocity.x <= boundary.x + boundary.width &&
+                this.player.y + this.player.height >= boundary.y &&
+                this.player.y <= boundary.y + boundary.height
+            ) {
+                console.log("cant go right")
+                this.player.x = boundary.x - this.player.width - 1;
+                this.player.velocity.x = 0;
+                boundary.blockEvent()
+
+            }
+
+
+        })
+    }
+    detectEvents(){
+        let playerArr=[]
+        for(let i=0;i<this.player.height;i++){
+            for(let j=0;j<this.player.width;j++){
+                playerArr.push([this.player.x + j,this.player.y+ i])
+
+                
+            }
+        }
+        // console.log(playerArr);
+
+    }
+
+
 }
 
 
@@ -324,9 +337,8 @@ function loadLevel(map) {
 
 
 //Active Code Below
-
-const level1 = new Level("../images/DungeonRoom2.png", collisions01)
-const character1 = new Character(700, 1000, 16, 32);
+const character1 = new Character(70, 1600, 16, 32);
+const level1 = new Level("../images/DungeonRoom2.png", collisions01, character1);
 const controller = new Controller(character1, level1.blockMap);
 console.log('char' + character1);
 
@@ -335,7 +347,8 @@ function animate() {
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     level1.draw()
     character1.update()
-    controller.detectCollision()
+    level1.detectCollision()
+    level1.detectEvents();
     //loadLevel(level1,character1)
     requestAnimationFrame(animate);
 }
