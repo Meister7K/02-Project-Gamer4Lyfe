@@ -25,8 +25,8 @@ This project requires the installation of:
 
 ## Usage
 - A user will create an account using a username, password, and email address. This will allow them access to the profile page, where they can see an example of the avatar used in game, their profile information (username, email, and date the account was created), the game controls, and various stats regarding their performance in game. Also on this page, is a play button, a save button, and a log out button. The save button will save the user's file to a unique file, saving scores and progress in the game. The log out button will do just that, log the user out and send them to the homepage. The play button will bring the user to the game screen. From here, you can play the game, return to the profile screen using a pause button, and return to the home screen using a log out button.
-Example GIF
-![Example GIF]()
+
+- ![GIF of the game](DungeonGame-GIF.gif)
 
 ## License
 - MIT
@@ -56,5 +56,6 @@ Example GIF
 - 
 
 ## Cited
-- my test code was used from an outside js file which the info was gained via watching this video. [link](https://www.youtube.com/watch?v=GFO_txvwK_c&list=PL5E9CLtOQnyF66RGdOk5OGGEbOFY9TYd5&index=21)
--[link](https://www.youtube.com/watch?v=_MyPLZSGS3s)
+- my test code was used from an outside js file which the info was gained via watching this video. 
+    - [https://www.youtube.com/watch?v=GFO_txvwK_c&list=PL5E9CLtOQnyF66RGdOk5OGGEbOFY9TYd5&index=21](https://www.youtube.com/watch?v=GFO_txvwK_c&list=PL5E9CLtOQnyF66RGdOk5OGGEbOFY9TYd5&index=21)
+    - [https://www.youtube.com/watch?v=_MyPLZSGS3s](https://www.youtube.com/watch?v=_MyPLZSGS3s)
