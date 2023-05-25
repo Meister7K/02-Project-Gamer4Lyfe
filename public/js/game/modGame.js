@@ -24,6 +24,16 @@ const gravity = 1.5;
 
 //collisions1[x][y] if=1 stop if 2 changelevel 3
 
+class Sprite{
+    constructor(x,y,img){
+        this.x = x;
+        this.y = y;
+        this.image = new Image();
+        this.image.src = img;
+
+    }
+}
+
 class Block {
 
     constructor(x, y, type, size = 64) {
@@ -110,7 +120,8 @@ class Controller {
     checkKeyDown(keyCode) {
         // console.log(keyCode);
         switch (keyCode) {
-            case 38 || 87:
+            case 38:
+            case 87:
                 //!edit to if touching ground is true
                 if (this.player.velocity.y === 0) {
                     this.player.velocity.y -= 20;
@@ -118,17 +129,20 @@ class Controller {
                 // console.log("up");
                 break;
 
-            case 40 || 83:
+            case 40:
+            case 83:
                 // console.log("interact");
                 this.interact = true //make interaction for opening doors
                 this.updatePlayer();
                 break;
-            case 37 || 65:
+            case 37:
+            case 65:
 
                 this.left = true;
                 this.updatePlayer();
                 break;
-            case 39 || 68:
+            case 39: 
+            case 68:
 
                 this.right = true;
                 this.updatePlayer();
@@ -142,20 +156,24 @@ class Controller {
     }
     checkKeyUp(keyCode) {
         switch (keyCode) {
-            case 38 || 87:
+            case 38:
+            case 87:
                 // console.log("up");
                 break;
-            case 40 || 83:
+            case 40: 
+            case 83:
                 this.interact = false;
                 this.updatePlayer();
                 // console.log("down");
                 break;
-            case 37 || 65:
+            case 37:
+            case 65:
                 // console.log("left");
                 this.left = false;
                 this.updatePlayer();
                 break;
-            case 39 || 68:
+            case 39:
+            case 68:
                 // console.log("right");
                 this.right = false;
                 this.updatePlayer();
